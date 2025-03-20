@@ -1,6 +1,51 @@
 import React from "react";
+import { useFormik } from "formik";
+import { basicSchema } from "../schemas/index.js";
 
-function LoginPage() {
+const onSubmit = async (values, actions) => {
+  // console.log(values);
+  // console.log(actions);
+  // console.log("submitted")
+  await new Promise((r) => setTimeout(r, 2000));
+  actions.resetForm();
+};
+
+const LoginPage = () => {
+  const {
+    handleSubmit,
+    errors,
+    touched,
+    isSubmitting,
+    handleChange,
+    handleBlur,
+    values,
+  } = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: basicSchema,
+    onSubmit,
+  });
+  //  const [formData , setFormDate] = useState({
+  //   name: '',
+  //   email: '',
+  //   password: ''
+  //  })
+
+  //  const handleChange =(e)=>{
+  //     const {name, value} = e.target;
+  //     setFormDate(prevState =>({...prevState, [name]: value}))
+  //  }
+
+  // const handleSubmit =(e)=>{
+  //     e.preventDefault();
+  //     console.log(formData)
+  // }
+  console.log(errors);
+
   return (
     <div className=" min-h-screen fixed inset-0 bg-black md:bg-black/50 z-10 flex flex-col justify-center py-12 sm:px-6 lg:px-8 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-md ">
@@ -11,7 +56,33 @@ function LoginPage() {
           </h1>
 
           {/* Form */}
-          <form className="space-y-6 ">
+          <form className="space-y-6 " onSubmit={handleSubmit}>
+            {/* name */}
+
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-white sm:text-gray-700 mb-1"
+              >
+                Full name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                onChange={handleChange}
+                value={values.name}
+                onBlur={handleBlur}
+                placeholder="John Doe"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
+                         focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 
+                         placeholder-gray-400"
+              />
+              {/* error for name */}
+              {errors.name && touched.name && (
+                <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+              )}
+            </div>
             {/* Email */}
             <div>
               <label
@@ -23,14 +94,19 @@ function LoginPage() {
               <input
                 id="email"
                 name="email"
+                onChange={handleChange}
+                value={values.email}
+                onBlur={handleBlur}
                 type="email"
-                autoComplete="email"
-                required
                 placeholder="example@gmail.com"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
                          focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 
                          placeholder-gray-400"
               />
+              {/* error for email */}
+              {errors.email && touched.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
             </div>
 
             {/* Password */}
@@ -44,14 +120,46 @@ function LoginPage() {
               <input
                 id="password"
                 name="password"
+                onChange={handleChange}
+                value={values.password}
+                onBlur={handleBlur}
                 type="password"
-                autoComplete="current-password"
-                required
                 placeholder="********"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
                          focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 
                          placeholder-gray-400"
               />
+              {/* error for password */}
+              {errors.password && touched.password && (
+                <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+              )}
+            </div>
+            {/* confirm password */}
+            <div>
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-white sm:text-gray-700 mb-1"
+              >
+                Confirm Passwword
+              </label>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                onChange={handleChange}
+                value={values.confirmPassword}
+                onBlur={handleBlur}
+                type="password"
+                placeholder="********"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
+                         focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 
+                         placeholder-gray-400"
+              />
+              {/* error for confirmPassword */}
+              {errors.confirmPassword && touched.confirmPassword && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.confirmPassword}
+                </p>
+              )}
             </div>
 
             {/* Remember Me & Forgot Password */}
@@ -84,8 +192,11 @@ function LoginPage() {
             {/* Sign In Button */}
             <button
               type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent 
-                      rounded-md shadow-sm text-sm font-medium text-white border-white hover:border-amber-300 bg-amber-300 transition-colors duration-300"
+              className={`w-full flex justify-center py-2 px-4 border border-transparent 
+              rounded-md shadow-sm text-sm font-medium text-white border-white 
+              hover:border-amber-300 bg-amber-300 transition-colors duration-300
+              ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
+              disabled={isSubmitting}
             >
               Sign in
             </button>
@@ -125,6 +236,6 @@ function LoginPage() {
       </div>
     </div>
   );
-}
+};
 
 export default LoginPage;

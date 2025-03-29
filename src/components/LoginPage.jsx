@@ -1,6 +1,8 @@
 import React from "react";
 import { useFormik } from "formik";
 import { basicSchema } from "../schemas/index.js";
+import overlay from "../assets/overlay.png";
+
 
 const onSubmit = async (values, actions) => {
   // console.log(values);
@@ -44,16 +46,26 @@ const LoginPage = () => {
   //     e.preventDefault();
   //     console.log(formData)
   // }
-  console.log(errors);
+  // console.log(errors);
 
   return (
-    <div className=" min-h-screen fixed inset-0 bg-black md:bg-black/50 z-10 flex flex-col justify-center py-12 sm:px-6 lg:px-8 ">
+    <div className=" min-h-screen fixed inset-0 bg-black md:bg-black z-10 flex flex-col justify-center py-12 sm:px-6 lg:px-8 ">
+        <div className="width-full h-[100vh]  ">
+              <img 
+                src={overlay} 
+                alt="" 
+                className="absolute md:left-0 md:top-[15%] h-[40vh] md:h-[50%] w-full md:w-[40%] object-cover opacity-80"
+              />
+            </div>
+            <div>
+              <h1>LynSound</h1>
+            </div>
       <div className="sm:mx-auto sm:w-full sm:max-w-md ">
         <div className=" py-8 px-4 shadow sm:rounded-lg sm:px-10">
           {/* Header */}
-          <h1 className="text-3xl md:text-4xl font-bold text-center text-white sm:text-gray-900 mb-8">
+          <h3 className="text-3xl md:text-4xl font-bold text-center  text-gray-100 mb-8">
             Sign into your account
-          </h1>
+          </h3>
 
           {/* Form */}
           <form className="space-y-6 " onSubmit={handleSubmit}>
@@ -62,7 +74,7 @@ const LoginPage = () => {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-white sm:text-gray-700 mb-1"
+                className="block text-sm font-medium text-white sm:text-gray-200 mb-1"
               >
                 Full name
               </label>
@@ -222,7 +234,7 @@ const LoginPage = () => {
                          text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 
                          focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
               >
-                <span>Sign in with Google</span>
+                <span>Sign in with Google</span>.
               </button>
             </div>
           </form>

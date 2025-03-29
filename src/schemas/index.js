@@ -10,8 +10,8 @@ export const basicSchema = yup.object().shape({
     .required("Email is required"),
   password: yup
     .string()
-    .min(8, "Password must be at least 8 characters")
-    .max(20, "Password must be at most 20 characters")   
+    .min(5, "Password must be at least 8 characters")
+    .max(15, "Password must be at most 20 characters")   
     .matches(passwordRegex, "password must have a capital letter, a small letter, a number and a special character")
     .required("Password is required"),
 

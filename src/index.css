@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 
+.sideBar ul li{
+    list-style: none;
+    padding: 0.5rem 0;  
+    background-color: #dbb407;
+} */

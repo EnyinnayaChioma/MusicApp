@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { basicSchema } from "../schemas/index.js";
 import overlay from "../assets/overlay.png";
@@ -210,7 +211,9 @@ const LoginPage = () => {
               ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
               disabled={isSubmitting}
             >
+              <Link to ="/home">
               Sign in
+              </Link>
             </button>
 
             {/* Divider */}

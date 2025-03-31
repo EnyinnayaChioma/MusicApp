@@ -7,7 +7,7 @@ import HomePage from "./components/HomePage";
 function App() {
   return (
     <>
-    {/* <Router>
+    <Router>
    
         
         <div>
@@ -20,8 +20,8 @@ function App() {
 
        
 
-      </Router> */}
-      <HomePage/>
+      </Router>
+      {/* <HomePage/> */}
     </>
   );
 }

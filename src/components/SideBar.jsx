@@ -9,7 +9,6 @@ function SideBar() {
   const mainNavItems = [
     { icon: "fi-rs-home", label: "Home", path: "/home" },
     { icon: "fi-rs-folder-music", label: "Library", path: "/library" },
-    { icon: "fi-rs-album-collection", label: "Albums", path: "/albums" },
     { icon: "fi-rs-mouse-pointer-heart", label: "Favorites", path: "/favorites" },
   ];
   

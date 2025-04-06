@@ -1,56 +1,89 @@
 import React from "react";
 import overlay from "../assets/overlay.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function SideBar() {
+  const location = useLocation();
+  
+  // Navigation items grouped by category
+  const mainNavItems = [
+    { icon: "fi-rs-home", label: "Home", path: "/home" },
+    { icon: "fi-rs-folder-music", label: "Library", path: "/library" },
+    { icon: "fi-rs-album-collection", label: "Albums", path: "/albums" },
+    { icon: "fi-rs-mouse-pointer-heart", label: "Favorites", path: "/favorites" },
+  ];
+  
+  const accountNavItems = [
+    { icon: "fi-rs-user-trust", label: "Profile", path: "/profile" },
+    { icon: "fi-rs-settings", label: "Settings", path: "/settings" },
+    { icon: "fi-rs-sign-out-alt", label: "Logout", path: "/logout" },
+  ];
+  
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
+
   return (
-    <>
-      <div className=" h-screen w-1/5 flex justify-center fixed inset-0 bg-black md:bg-black z-10 text-white text-xl ">
-        <div className=" ">
+    <aside className="h-screen w-64 fixed inset-y-0 left-0 bg-gray-900 text-white shadow-lg z-10 border-r border-gray-800">
+      <div className="relative h-full flex flex-col">
+        {/* Logo area */}
+        <div className="px-6 py-8">
+          <h1 className="text-2xl font-semibold">Music App</h1>
+        </div>
+        
+        {/* Background overlay */}
+        <div className="absolute left-0 top-1/3 h-1/2 w-full pointer-events-none overflow-hidden opacity-20">
           <img
             src={overlay}
             alt=""
-            className="absolute md:left-0 md:top-[15%] h-[40vh] md:h-[50%] w-full md:w-[40%] object-cover opacity-80"
+            className="w-full h-full object-cover"
           />
         </div>
-        <ul className="sideBar navitems mt-20 cursor-pointer">
-          
-          <li className="mb-8 flex hover:bg-[#f59e0b]   rounded-lg p-2">
-          
-            <i class="fi fi-rs-home"></i>
-            <span className="ml-4">Home</span>
-           
-          </li>
-          <li className="mb-8 flex  hover:bg-[#f59e0b]  focus:bg-inherit rounded-lg p-2 " >
-            <i class="fi fi-rs-folder-music"></i>
-            <span className="ml-4">Library</span>
-          </li>
-          <li className="mb-8 flex  hover:bg-[#f59e0b]  focus:bg-inherit rounded-lg p-2 ">
-            <i class="fi fi-rs-album-collection"></i>
-            <span className="ml-4">Album</span>
-          </li>
-          <li className="mb-8 flex  hover:bg-[#f59e0b]  focus:bg-inherit rounded-lg p-2">
-            <i class="fi fi-rs-mouse-pointer-heart"></i>
-            <span className="ml-4">Favourite</span>
-          </li>
-          {/* settings */}
-          <div className="setting mt-[30rem] cursor-pointer">
-            <li className="mb-8 flex  hover:bg-[#f59e0b]  focus:bg-inherit rounded-lg p-2">
-              <i class="fi fi-rs-user-trust"></i>
-              <span className="ml-4">Profile</span>
-            </li>
-            <li className="mb-8 flex  hover:bg-[#f59e0b]  focus:bg-inherit rounded-lg p-2 ">
-              <i class="fi fi-rs-settings"></i>
-              <span className="ml-4">Setting</span>
-            </li>
-            <li className="mb-2 flex  hover:bg-[#f59e0b]  focus:bg-inherit rounded-lg p-2 ">
-              <i class="fi fi-rs-sign-out-alt"></i>
-              <span className="ml-4">Logout</span>
-            </li>
+        
+        {/* Main navigation */}
+        <nav className="flex-1 px-4 py-4 z-10">
+          <div className="space-y-1">
+            {mainNavItems.map((item) => (
+              <Link
+                key={item.label}
+                to={item.path}
+                className={`flex items-center px-4 py-3 rounded-lg transition-colors duration-200 ${
+                  isActive(item.path)
+                    ? "bg-[#FBBC05] text-white"
+                    : "text-gray-300 hover:bg-[#FBBC05] hover:text-white"
+                }`}
+              >
+                <i className={`${item.icon} text-lg`}></i>
+                <span className="ml-3 font-medium">{item.label}</span>
+              </Link>
+            ))}
           </div>
-        </ul>
+        </nav>
+        
+        {/* Account section */}
+        <div className="px-4 py-4 border-t border-gray-800">
+          <p className="px-4 text-xs uppercase tracking-wider text-gray-400 mb-2">
+            Account
+          </p>
+          <div className="space-y-1">
+            {accountNavItems.map((item) => (
+              <Link
+                key={item.label}
+                to={item.path}
+                className={`flex items-center px-4 py-3 rounded-lg transition-colors duration-200 ${
+                  isActive(item.path)
+                    ? "bg-[#FBBC05] text-white"
+                    : "text-gray-300 hover:bg-[#FBBC05] hover:text-white"
+                }`}
+              >
+                <i className={`${item.icon} text-lg`}></i>
+                <span className="ml-3 font-medium">{item.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
-    </>
+    </aside>
   );
 }
 

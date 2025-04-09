@@ -161,7 +161,6 @@ function SideBar() {
       <div className={`transition-all duration-300 ease-in-out ${
         !isMobile && 'md:ml-64'
       }`}>
-        {/* Your page content would go here */}
       </div>
     </>
   );
